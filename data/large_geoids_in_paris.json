@@ -1,0 +1,426 @@
+[
+  {
+    "geoid": "town_argenteuil",
+    "title": "Argenteuil",
+    "scale": 6.0,
+    "lat": 48.950557,
+    "long": 2.247164,
+    "radius": 3.2177190707189514
+  },
+  {
+    "geoid": "town_wissous",
+    "title": "Wissous",
+    "scale": 6.0,
+    "lat": 48.731301,
+    "long": 2.326178,
+    "radius": 3.063589119184766
+  },
+  {
+    "geoid": "town_tremblayenfrance",
+    "title": "Tremblay-en-France",
+    "scale": 5.0,
+    "lat": 48.975286,
+    "long": 2.545276,
+    "radius": 4.504657567299841
+  },
+  {
+    "geoid": "suburb_coeuilly",
+    "title": "Coeuilly",
+    "scale": 5.0,
+    "lat": 48.815484,
+    "long": 2.54944,
+    "radius": 4.689488718032018
+  },
+  {
+    "geoid": "town_gennevilliers",
+    "title": "Gennevilliers",
+    "scale": 6.0,
+    "lat": 48.927507,
+    "long": 2.285624,
+    "radius": 3.2115381098107356
+  },
+  {
+    "geoid": "town_rueilmalmaison",
+    "title": "Rueil-Malmaison",
+    "scale": 6.0,
+    "lat": 48.871862,
+    "long": 2.180549,
+    "radius": 2.8617179949079294
+  },
+  {
+    "geoid": "town_noisylegrand",
+    "title": "Noisy-le-Grand",
+    "scale": 6.0,
+    "lat": 48.832522,
+    "long": 2.55886,
+    "radius": 3.3934929848796025
+  },
+  {
+    "geoid": "town_creteil",
+    "title": "Créteil",
+    "scale": 6.0,
+    "lat": 48.779152,
+    "long": 2.45375,
+    "radius": 2.821296399209426
+  },
+  {
+    "geoid": "town_bobigny",
+    "title": "Bobigny",
+    "scale": 6.0,
+    "lat": 48.906489,
+    "long": 2.445672,
+    "radius": 2.7725854392671625
+  },
+  {
+    "geoid": "suburb_lavarennesainthilaire",
+    "title": "La Varenne Saint-hilaire",
+    "scale": 6.0,
+    "lat": 48.793658,
+    "long": 2.513894,
+    "radius": 3.1369292063826064
+  },
+  {
+    "geoid": "town_jouyenjosas",
+    "title": "Jouy-en-Josas",
+    "scale": 6.0,
+    "lat": 48.763721,
+    "long": 2.170304,
+    "radius": 2.600358078837278
+  },
+  {
+    "geoid": "suburb_laplainesaintdenis",
+    "title": "La Plaine Saint-denis",
+    "scale": 6.0,
+    "lat": 48.915429,
+    "long": 2.359103,
+    "radius": 3.136744422735988
+  },
+  {
+    "geoid": "town_sartrouville",
+    "title": "Sartrouville",
+    "scale": 6.0,
+    "lat": 48.935188,
+    "long": 2.169128,
+    "radius": 2.7187735756600206
+  },
+  {
+    "geoid": "town_levaldalbian",
+    "title": "Le Val d'Albian",
+    "scale": 5.0,
+    "lat": 48.756992,
+    "long": 2.184688,
+    "radius": 4.840379726784437
+  },
+  {
+    "geoid": "street_autoroutedelest-paris",
+    "title": "Autoroute de l'Est",
+    "scale": 6.0,
+    "lat": 48.823367,
+    "long": 2.447309,
+    "radius": 2.720046292622583
+  },
+  {
+    "geoid": "town_bonneuilenfrance",
+    "title": "Bonneuil-en-France",
+    "scale": 6.0,
+    "lat": 48.972929,
+    "long": 2.435174,
+    "radius": 2.5525293732762524
+  },
+  {
+    "geoid": "town_parayvieilleposte",
+    "title": "Paray-Vieille-Poste",
+    "scale": 6.0,
+    "lat": 48.723832,
+    "long": 2.359844,
+    "radius": 2.6386285615988783
+  },
+  {
+    "geoid": "town_nanterre",
+    "title": "Nanterre",
+    "scale": 6.0,
+    "lat": 48.893325,
+    "long": 2.194856,
+    "radius": 3.323088280067826
+  },
+  {
+    "geoid": "town_vitrysurseine",
+    "title": "Vitry-sur-Seine",
+    "scale": 6.0,
+    "lat": 48.790415,
+    "long": 2.392242,
+    "radius": 2.5452118916355055
+  },
+  {
+    "geoid": "town_yerres",
+    "title": "Yerres",
+    "scale": 6.0,
+    "lat": 48.71615,
+    "long": 2.495654,
+    "radius": 2.870876260310216
+  },
+  {
+    "geoid": "town_villepinte",
+    "title": "Villepinte",
+    "scale": 6.0,
+    "lat": 48.956669,
+    "long": 2.533494,
+    "radius": 2.8310484578213018
+  },
+  {
+    "geoid": "town_clamart",
+    "title": "Clamart",
+    "scale": 6.0,
+    "lat": 48.796312,
+    "long": 2.251612,
+    "radius": 2.538853162089325
+  },
+  {
+    "geoid": "postcode_93299",
+    "title": "93299",
+    "scale": 6.0,
+    "lat": 48.974706,
+    "long": 2.547785,
+    "radius": 2.728731228549265
+  },
+  {
+    "geoid": "postcode_93298",
+    "title": "93298",
+    "scale": 6.0,
+    "lat": 48.974706,
+    "long": 2.547785,
+    "radius": 2.728731228549265
+  },
+  {
+    "geoid": "postcode_93295",
+    "title": "93295",
+    "scale": 6.0,
+    "lat": 48.974706,
+    "long": 2.547785,
+    "radius": 2.728731228549265
+  },
+  {
+    "geoid": "postcode_93294",
+    "title": "93294",
+    "scale": 6.0,
+    "lat": 48.974706,
+    "long": 2.547785,
+    "radius": 2.728731228549265
+  },
+  {
+    "geoid": "postcode_93297",
+    "title": "93297",
+    "scale": 6.0,
+    "lat": 48.974706,
+    "long": 2.547785,
+    "radius": 2.728731228549265
+  },
+  {
+    "geoid": "postcode_93296",
+    "title": "93296",
+    "scale": 6.0,
+    "lat": 48.974706,
+    "long": 2.547785,
+    "radius": 2.728731228549265
+  },
+  {
+    "geoid": "postcode_93291",
+    "title": "93291",
+    "scale": 6.0,
+    "lat": 48.974706,
+    "long": 2.547785,
+    "radius": 2.728731228549265
+  },
+  {
+    "geoid": "postcode_93290",
+    "title": "93290",
+    "scale": 6.0,
+    "lat": 48.974433,
+    "long": 2.548126,
+    "radius": 2.7051350495806115
+  },
+  {
+    "geoid": "postcode_93293",
+    "title": "93293",
+    "scale": 6.0,
+    "lat": 48.974706,
+    "long": 2.547785,
+    "radius": 2.728731228549265
+  },
+  {
+    "geoid": "postcode_93292",
+    "title": "93292",
+    "scale": 6.0,
+    "lat": 48.974706,
+    "long": 2.547785,
+    "radius": 2.728731228549265
+  },
+  {
+    "geoid": "town_mairiedefresnes",
+    "title": "Mairie de Fresnes",
+    "scale": 6.0,
+    "lat": 48.75501,
+    "long": 2.322144,
+    "radius": 3.137333845136708
+  },
+  {
+    "geoid": "town_villeneuvestgeorges",
+    "title": "Villeneuve-Saint-Georges",
+    "scale": 6.0,
+    "lat": 48.734597,
+    "long": 2.449498,
+    "radius": 2.735789918041957
+  },
+  {
+    "geoid": "town_villebonsuryvette",
+    "title": "Villebon-sur-Yvette",
+    "scale": 6.0,
+    "lat": 48.699206,
+    "long": 2.243167,
+    "radius": 2.7664912602962355
+  },
+  {
+    "geoid": "localadministrativearea_paris16earrondissement",
+    "title": "Paris 16e Arrondissement",
+    "scale": 5.0,
+    "lat": 48.857114,
+    "long": 2.262689,
+    "radius": 3.8437091308811535
+  },
+  {
+    "geoid": "extra_boisdevincennes",
+    "title": "Bois de Vincennes",
+    "scale": 5.0,
+    "lat": 48.832224,
+    "long": 2.42461,
+    "radius": 4.643515707449797
+  },
+  {
+    "geoid": "localadministrativearea_paris12earrondissement",
+    "title": "Paris 12e Arrondissement",
+    "scale": 5.0,
+    "lat": 48.835111,
+    "long": 2.417077,
+    "radius": 4.000785683237576
+  },
+  {
+    "geoid": "localadministrativearea_paris15earrondissement",
+    "title": "Paris 15e Arrondissement",
+    "scale": 6.0,
+    "lat": 48.841713,
+    "long": 2.29362,
+    "radius": 2.8925397951272056
+  },
+  {
+    "geoid": "town_aulnaysousbois",
+    "title": "Aulnay-sous-Bois",
+    "scale": 6.0,
+    "lat": 48.931832,
+    "long": 2.489715,
+    "radius": 3.4158696784071743
+  },
+  {
+    "geoid": "town_stdenis-seinestdenis",
+    "title": "Saint-Denis",
+    "scale": 6.0,
+    "lat": 48.927442,
+    "long": 2.364961,
+    "radius": 2.926470106909142
+  },
+  {
+    "geoid": "town_champignysurmarne",
+    "title": "Champigny-sur-Marne",
+    "scale": 6.0,
+    "lat": 48.815463,
+    "long": 2.527686,
+    "radius": 3.011857893386616
+  },
+  {
+    "geoid": "town_asnieressurseine",
+    "title": "Asnières-sur-Seine",
+    "scale": 6.0,
+    "lat": 48.91413,
+    "long": 2.296187,
+    "radius": 2.5217786300016347
+  },
+  {
+    "geoid": "town_boissystleger",
+    "title": "Boissy-Saint-Léger",
+    "scale": 6.0,
+    "lat": 48.744111,
+    "long": 2.526691,
+    "radius": 2.5769176429255
+  },
+  {
+    "geoid": "town_bievres-essonne",
+    "title": "Bièvres",
+    "scale": 6.0,
+    "lat": 48.762071,
+    "long": 2.208887,
+    "radius": 3.4325780843663978
+  },
+  {
+    "geoid": "extra_boisdeboulogne",
+    "title": "Bois de Boulogne",
+    "scale": 5.0,
+    "lat": 48.86306,
+    "long": 2.261776,
+    "radius": 4.640678104885608
+  },
+  {
+    "geoid": "town_gonesse",
+    "title": "Gonesse",
+    "scale": 6.0,
+    "lat": 48.986043,
+    "long": 2.460378,
+    "radius": 3.2868721055741212
+  },
+  {
+    "geoid": "town_palaiseau",
+    "title": "Palaiseau",
+    "scale": 6.0,
+    "lat": 48.712692,
+    "long": 2.245222,
+    "radius": 2.775654113040797
+  },
+  {
+    "geoid": "town_ivrysurseine",
+    "title": "Ivry-sur-Seine",
+    "scale": 6.0,
+    "lat": 48.814502,
+    "long": 2.392237,
+    "radius": 2.643153845104839
+  },
+  {
+    "geoid": "town_sucyenbrie",
+    "title": "Sucy-en-Brie",
+    "scale": 6.0,
+    "lat": 48.769552,
+    "long": 2.535645,
+    "radius": 2.822460001277445
+  },
+  {
+    "geoid": "town_issylesmoulineaux",
+    "title": "Issy-les-Moulineaux",
+    "scale": 6.0,
+    "lat": 48.822966,
+    "long": 2.251247,
+    "radius": 2.708978121384078
+  },
+  {
+    "geoid": "town_montreuil-seinestdenis",
+    "title": "Montreuil",
+    "scale": 6.0,
+    "lat": 48.866872,
+    "long": 2.451776,
+    "radius": 2.6296735676593337
+  },
+  {
+    "geoid": "town_meudonlaforet",
+    "title": "Meudon-la-forêt",
+    "scale": 5.0,
+    "lat": 48.78663,
+    "long": 2.224596,
+    "radius": 3.783607263591991
+  }
+]

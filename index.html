@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps JavaScript API v3 Example: Map Coordinates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link href="https://google-developers.appspot.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+    <style>
+      #map_canvas {
+        position: absolute;
+        top: 100px;
+        right: 40px;
+        width: 400px;
+        height: 300px;
+      }
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script>
+      var map;
+      var paris_center = new google.maps.LatLng(48.849607,2.369799);
+      var paris_bounds = new google.maps.LatLngBounds(
+                            new google.maps.LatLng(48.6826472764688,2.13424956576032),
+                            new google.maps.LatLng(49.0160829026163,2.60692165753642));
+
+      var geoids = [];
+
+      var circles = [];
+
+      var singleton_infowindow;
+      var prev_scale;
+
+      function initialize() {
+        var mapOptions = {
+          zoom: 10,
+          center: paris_center,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+        map.fitBounds(paris_bounds);
+
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+          console.log("zoom", map.getZoom());
+          draw_geoids();
+        });
+
+        // fetch geoids
+        $.ajax("data/more_large_geoids_in_paris.json").done(function(data) {
+          geoids = data;
+          prev_scale = -1; // force draw
+          draw_geoids();
+        });
+      }
+
+      function clear_circles() {
+        $(circles).each(function(i,c) {
+          c.setMap(null);
+        });
+        circles = [];
+      }
+
+      function draw_geoids() {
+        var target_scale = 1;
+        var z = map.getZoom();
+        if(z >= 7) { target_scale = 1; }
+        if(z >= 9) { target_scale = 5; }
+        if(z >= 11) { target_scale = 6; }
+        if(z >= 12) { target_scale = 7; }
+
+        if(target_scale == prev_scale) {
+          console.log(target_scale, prev_scale);
+          return;
+        }
+
+        prev_scale = target_scale;
+        clear_circles();
+
+        $(geoids).each(function(i,e) {
+          if(e.scale <= target_scale && e.scale >= target_scale - 2) {
+
+            e["bounds"] = new google.maps.LatLngBounds(
+                              new google.maps.LatLng(e.min_lat, e.min_long),
+                              new google.maps.LatLng(e.max_lat, e.max_long));
+
+            var c = new google.maps.Circle({
+              center: new google.maps.LatLng(e.lat, e.long),
+              radius: e.radius*300,
+              strokeColor: "white",
+              fillColor: "#48B6E7",
+              strokeWeight: 2,
+              strokeOpacity: 1,
+              fillOpacity: 1,
+              map: map
+            });
+
+            /*
+            var c = new google.maps.Rectangle({
+              bounds: e.bounds,
+              strokeColor: "#3333ff",
+              fillColor: "#3333ff",
+              strokeWeight: 1,
+              strokeOpacity: 1,
+              fillOpacity: 0.2,
+              map: map
+            });
+            */
+
+            circles.push(c);
+
+            google.maps.event.addListener(c, 'mouseout', function() {
+              console.log('mouseout')
+              if(singleton_infowindow) {
+                singleton_infowindow.close();
+              }
+            });
+
+            google.maps.event.addListener(c, 'mouseover', function() {
+              console.log(e.title);
+            });
+
+            google.maps.event.addListener(c, 'click', function() {
+              console.log(c);
+              map.fitBounds(e.bounds);
+            });
+
+          }
+        });
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+    <div id="map_canvas"></div>
+  </body>
+</html>
