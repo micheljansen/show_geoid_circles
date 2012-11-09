@@ -50,12 +50,10 @@
         map.fitBounds(paris_bounds);
 
         google.maps.event.addListener(map, 'zoom_changed', function() {
-          console.log("zoom", map.getZoom());
           draw_geoids();
         });
 
         google.maps.event.addListener(map, 'dragend', function() {
-          console.log("zoom", map.getZoom());
           draw_geoids();
         });
         /*
@@ -67,7 +65,7 @@
 
         // fetch geoids
         $.ajax("data/all_geoids_in_paris.json").done(function(data) {
-          geoids = data;
+          geoids = _(data).sortBy(function(e) {return -e.radius});
           prev_scale = -1; // force draw
           draw_geoids();
         });
@@ -103,14 +101,43 @@
 
         clear_circles();
 
-        var bounds = map.getBounds() ? map.getBounds() : paris_bounds;
+        var map_bounds = map.getBounds() ? map.getBounds() : paris_bounds;
 
-        $(geoids).each(function(i,e) {
-          e["bounds"] = new google.maps.LatLngBounds(
-              new google.maps.LatLng(e.min_lat, e.min_long),
-              new google.maps.LatLng(e.max_lat, e.max_long));
+        var candidates = _(geoids).filter(function(e) {
+          /*
+          var bounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(e.min_lat, e.min_long),
+                new google.maps.LatLng(e.max_lat, e.max_long));
+          return map_bounds.intersects(bounds);
+          */
+          return map_bounds.contains(new google.maps.LatLng(e.lat, e.long));
+        });
 
-          if(bounds.intersects(e.bounds) && e.radius >= minkm && e.radius <= maxkm) {
+        var num_candidates = candidates.length;
+
+        // now see how many we filter
+        var found = false;
+        var i = -1;
+        while(i < num_candidates - 2 && !found) {
+          i++;
+          if(candidates[i].radius > minkm) {
+            // too big
+          }
+          else {
+            found = true;
+          }
+        }
+
+        console.log(0, i, num_candidates);
+
+        max_i = Math.min(num_candidates, i+25);
+        min_i = i;
+        if(max_i - min_i < 25) {
+          // add more
+        }
+
+        _(candidates.slice(min_i, max_i)).each(function(e) {
+          if(true || e.radius >= minkm && e.radius <= maxkm) {
 
             var c = new google.maps.Circle({
               center: new google.maps.LatLng(e.lat, e.long),
@@ -122,8 +149,9 @@
               fillOpacity: 0.2,
             });
 
-            var msize = e.radius * 300 / mpp;
-            marker_image = msize > 68 ? marker_l : (msize < 20 ? marker_s : marker_m)
+            //var msize = e.radius * 300 / mpp;
+            //marker_image = msize > 68 ? marker_l : (msize < 20 ? marker_s : marker_m)
+            var marker_image = marker_m;
             var m = new google.maps.Marker({
               position: new google.maps.LatLng(e.lat, e.long),
               clickable: true,
