@@ -30,6 +30,13 @@
 
       var singleton_infowindow;
 
+      var LOWER_CUTOFF = 100;
+      var UPPER_CUTOFF = 300;
+
+      var marker_s = new google.maps.MarkerImage("marker.png", new google.maps.Size(17,17), new google.maps.Point(0,0), new google.maps.Point(8.5,8.5), new google.maps.Size(17,17));
+      var marker_m = new google.maps.MarkerImage("marker.png", new google.maps.Size(34,34), new google.maps.Point(0,0), new google.maps.Point(17,17));
+      var marker_l = new google.maps.MarkerImage("marker.png", new google.maps.Size(68,68), new google.maps.Point(0,0), new google.maps.Point(34,34), new google.maps.Size(68,68));
+
       function initialize() {
         var mapOptions = {
           zoom: 10,
@@ -47,7 +54,7 @@
         });
 
         // fetch geoids
-        $.ajax("data/more_large_geoids_in_paris.json").done(function(data) {
+        $.ajax("data/all_geoids_in_paris.json").done(function(data) {
           geoids = data;
           prev_scale = -1; // force draw
           draw_geoids();
@@ -75,8 +82,8 @@
 
       function draw_geoids() {
         var mpp = meters_per_pixel();
-        var min_geoid_size_m = 40*mpp;
-        var max_geoid_size_m = 100*mpp;
+        var min_geoid_size_m = LOWER_CUTOFF*mpp;
+        var max_geoid_size_m = UPPER_CUTOFF*mpp;
         var minkm = min_geoid_size_m / 1000;
         var maxkm = max_geoid_size_m / 1000;
         console.log("map range radius", display_radius());
@@ -91,6 +98,7 @@
                               new google.maps.LatLng(e.min_lat, e.min_long),
                               new google.maps.LatLng(e.max_lat, e.max_long));
 
+            /*
             var c = new google.maps.Circle({
               center: new google.maps.LatLng(e.lat, e.long),
               radius: e.radius*300,
@@ -99,6 +107,22 @@
               strokeWeight: 2,
               strokeOpacity: 1,
               fillOpacity: 1,
+              map: map
+            });
+            */
+
+            var msize = e.radius * 300 / mpp;
+            marker_image = msize > 68 ? marker_l : (msize < 20 ? marker_s : marker_m)
+            var m = new google.maps.Marker({
+              position: new google.maps.LatLng(e.lat, e.long),
+              fillColor: "#48B6E7",
+              strokeWeight: 2,
+              strokeOpacity: 1,
+              fillOpacity: 1,
+              flat: true,
+              title: e.title +" ("+e.num_results+")",
+              icon: marker_image,
+              visible: true,
               map: map
             });
 
@@ -114,8 +138,9 @@
             });
             */
 
-            circles.push(c);
+            circles.push(m);
 
+            /*
             google.maps.event.addListener(c, 'mouseout', function() {
               if(singleton_infowindow) {
                 singleton_infowindow.close();
@@ -130,6 +155,7 @@
               console.log(c);
               map.fitBounds(e.bounds);
             });
+            */
 
           }
         });
