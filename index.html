@@ -30,7 +30,7 @@
 
       var singleton_infowindow;
 
-      var LOWER_CUTOFF = 100;
+      var LOWER_CUTOFF = 60;
       var UPPER_CUTOFF = 300;
 
       var marker_s = new google.maps.MarkerImage("marker.png", new google.maps.Size(17,17), new google.maps.Point(0,0), new google.maps.Point(8.5,8.5), new google.maps.Size(17,17));
@@ -111,23 +111,21 @@
 
           if(bounds.intersects(e.bounds) && e.radius >= minkm && e.radius <= maxkm) {
 
-            /*
             var c = new google.maps.Circle({
               center: new google.maps.LatLng(e.lat, e.long),
-              radius: e.radius*300,
-              strokeColor: "white",
-              fillColor: "#48B6E7",
-              strokeWeight: 2,
+              radius: e.radius*1000,
+              strokeColor: "#48B6E7",
+              fillColor: "white",
+              strokeWeight: 1,
               strokeOpacity: 1,
-              fillOpacity: 1,
-              map: map
+              fillOpacity: 0.2,
             });
-            */
 
             var msize = e.radius * 300 / mpp;
             marker_image = msize > 68 ? marker_l : (msize < 20 ? marker_s : marker_m)
             var m = new google.maps.Marker({
               position: new google.maps.LatLng(e.lat, e.long),
+              clickable: true,
               fillColor: "#48B6E7",
               strokeWeight: 2,
               strokeOpacity: 1,
@@ -153,22 +151,21 @@
 
             circles.push(m);
 
-            /*
-            google.maps.event.addListener(c, 'mouseout', function() {
-              if(singleton_infowindow) {
-                singleton_infowindow.close();
-              }
+            google.maps.event.addListener(m, 'mouseout', function() {
+              console.log("mouseout");
+              c.setMap(null);
             });
 
-            google.maps.event.addListener(c, 'mouseover', function() {
-              console.log(e.title +" ("+e.num_results+")");
+            google.maps.event.addListener(m, 'mouseover', function() {
+              console.log("mouse");
+              c.setMap(map);
+              console.log(c, map);
             });
 
-            google.maps.event.addListener(c, 'click', function() {
-              console.log(c);
+            google.maps.event.addListener(m, 'click', function() {
+              console.log("click", m)
               map.fitBounds(e.bounds);
             });
-            */
 
           }
         });
