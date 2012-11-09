@@ -128,13 +128,13 @@
           }
         }
 
-        console.log(0, i, num_candidates);
 
         max_i = Math.min(num_candidates, i+25);
         min_i = i;
         if(max_i - min_i < 25) {
-          // add more
+          min_i = Math.max(0, min_i - (25-(max_i - min_i)));
         }
+        console.log(min_i, max_i);
 
         _(candidates.slice(min_i, max_i)).each(function(e) {
           if(true || e.radius >= minkm && e.radius <= maxkm) {
@@ -149,9 +149,9 @@
               fillOpacity: 0.2,
             });
 
-            //var msize = e.radius * 300 / mpp;
-            //marker_image = msize > 68 ? marker_l : (msize < 20 ? marker_s : marker_m)
             var marker_image = marker_m;
+            var msize = e.radius * 1000 / mpp;
+            marker_image = msize > 68 ? marker_l : (msize < 20 ? marker_s : marker_m)
             var m = new google.maps.Marker({
               position: new google.maps.LatLng(e.lat, e.long),
               clickable: true,
@@ -181,19 +181,20 @@
             circles.push(m);
 
             google.maps.event.addListener(m, 'mouseout', function() {
-              console.log("mouseout");
               c.setMap(null);
             });
 
             google.maps.event.addListener(m, 'mouseover', function() {
-              console.log("mouse");
               c.setMap(map);
-              console.log(c, map);
             });
 
             google.maps.event.addListener(m, 'click', function() {
+              var bounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(e.min_lat, e.min_long),
+                new google.maps.LatLng(e.max_lat, e.max_long));
+
               console.log("click", m)
-              map.fitBounds(e.bounds);
+              map.fitBounds(bounds);
             });
 
           }
