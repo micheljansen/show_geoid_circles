@@ -53,6 +53,17 @@
           draw_geoids();
         });
 
+        google.maps.event.addListener(map, 'dragend', function() {
+          console.log("zoom", map.getZoom());
+          draw_geoids();
+        });
+        /*
+        google.maps.event.addListener(map, 'bounds_changed', function() {
+          console.log("pan/zoom", map.getZoom());
+          draw_geoids();
+        });
+        */
+
         // fetch geoids
         $.ajax("data/all_geoids_in_paris.json").done(function(data) {
           geoids = data;
@@ -91,12 +102,14 @@
 
         clear_circles();
 
-        $(geoids).each(function(i,e) {
-          if(e.radius >= minkm && e.radius <= maxkm) {
+        var bounds = map.getBounds() ? map.getBounds() : paris_bounds;
 
-            e["bounds"] = new google.maps.LatLngBounds(
-                              new google.maps.LatLng(e.min_lat, e.min_long),
-                              new google.maps.LatLng(e.max_lat, e.max_long));
+        $(geoids).each(function(i,e) {
+          e["bounds"] = new google.maps.LatLngBounds(
+              new google.maps.LatLng(e.min_lat, e.min_long),
+              new google.maps.LatLng(e.max_lat, e.max_long));
+
+          if(bounds.intersects(e.bounds) && e.radius >= minkm && e.radius <= maxkm) {
 
             /*
             var c = new google.maps.Circle({
