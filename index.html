@@ -116,14 +116,13 @@
             circles.push(c);
 
             google.maps.event.addListener(c, 'mouseout', function() {
-              console.log('mouseout')
               if(singleton_infowindow) {
                 singleton_infowindow.close();
               }
             });
 
             google.maps.event.addListener(c, 'mouseover', function() {
-              console.log(e.title);
+              console.log(e.title +" ("+e.num_results+")");
             });
 
             google.maps.event.addListener(c, 'click', function() {
