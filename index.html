@@ -15,7 +15,7 @@
       }
     </style>
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script>
       var map;
@@ -29,7 +29,6 @@
       var circles = [];
 
       var singleton_infowindow;
-      var prev_scale;
 
       function initialize() {
         var mapOptions = {
@@ -55,6 +54,18 @@
         });
       }
 
+      function display_radius() {
+        var bounds = map.getBounds() ? map.getBounds() : paris_bounds;
+        return google.maps.geometry.spherical.computeDistanceBetween (bounds.getNorthEast(), bounds.getSouthWest())/2;
+      }
+
+      function meters_per_pixel() {
+        var pixel_radius = Math.sqrt(Math.pow($("#map_canvas").width(), 2) + Math.pow($("#map_canvas").height(), 2))/2;
+        var mpp = display_radius() / pixel_radius;
+        //console.log(pixel_radius, display_radius(), mpp);
+        return mpp;
+      }
+
       function clear_circles() {
         $(circles).each(function(i,c) {
           c.setMap(null);
@@ -63,23 +74,17 @@
       }
 
       function draw_geoids() {
-        var target_scale = 1;
-        var z = map.getZoom();
-        if(z >= 7) { target_scale = 1; }
-        if(z >= 9) { target_scale = 5; }
-        if(z >= 11) { target_scale = 6; }
-        if(z >= 12) { target_scale = 7; }
+        var mpp = meters_per_pixel();
+        var min_geoid_size_m = 40*mpp;
+        var max_geoid_size_m = 100*mpp;
+        var minkm = min_geoid_size_m / 1000;
+        var maxkm = max_geoid_size_m / 1000;
+        console.log("showing only geoids of size", min_geoid_size_m);
 
-        if(target_scale == prev_scale) {
-          console.log(target_scale, prev_scale);
-          return;
-        }
-
-        prev_scale = target_scale;
         clear_circles();
 
         $(geoids).each(function(i,e) {
-          if(e.scale <= target_scale && e.scale >= target_scale - 2) {
+          if(e.radius >= minkm && e.radius <= maxkm) {
 
             e["bounds"] = new google.maps.LatLngBounds(
                               new google.maps.LatLng(e.min_lat, e.min_long),
