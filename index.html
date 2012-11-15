@@ -246,6 +246,15 @@
           }
         });
 
+        // fix marker images for existing geo ids that changed
+        _(geoids_to_show).each(function(e) {
+          var msize = e.radius * 1000 / mpp;
+          marker_image = msize > 68 ? marker_l : (msize < 20 ? marker_s : marker_m)
+          marker_for[e.geoid].setIcon(marker_image);
+        });
+
+
+        // remove old ones
         _(geoids_out).each(function(e) {
           // remove
           if(marker_for[e.geoid]) {
