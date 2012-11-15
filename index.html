@@ -166,12 +166,14 @@
         });
 
         var num_candidates = candidates.length;
+        var N = 10;
 
         // we don't want to show geo ids that are too big
         // skip the list until we reach the first geo id that is not too big to show
+        // or we reach the last N
         var found = false;
         var i = -1;
-        while(i < num_candidates-1 && !found) {
+        while(i < Math.max(-1, num_candidates-N-1) && !found) {
           i++;
           if(candidates[i].radius > minkm) {
             // too big
@@ -183,7 +185,6 @@
 
         // at this point, i points to the first element that is not too big
 
-        var N = 10;
 
         // find the first N geoids to show
         var geoids_to_show = [];
@@ -201,7 +202,6 @@
             // this geoid does not fall in any already shown geoid
             if(geoid == undefined) {
               console.log("geoid undefined");
-              debugger;
             }
             geoids_to_show.push(geoid);
           }
