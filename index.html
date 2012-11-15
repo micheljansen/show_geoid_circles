@@ -187,7 +187,7 @@
 
         // find the first N geoids to show
         var geoids_to_show = [];
-        while(i < num_candidates-1 && geoids_to_show.length <= N) {
+        while(i < num_candidates-1 && geoids_to_show.length < N) {
           i++;
           var geoid = candidates[i];
 
