@@ -69,7 +69,8 @@
 
       var circles = [];
 
-      var singleton_infowindow;
+      var geoids_shown = [];
+      var marker_for = {};
 
       var LOWER_CUTOFF = 60;
       var UPPER_CUTOFF = 300;
@@ -90,14 +91,18 @@
         map.fitBounds(paris_bounds);
 
         google.maps.event.addListener(map, 'zoom_changed', function() {
-          console.log("zoom_changed");
+          //console.log("zoom_changed");
+          draw_geoids();
         });
 
+        /*
         google.maps.event.addListener(map, 'dragstart', function() {
         });
+        */
 
         google.maps.event.addListener(map, 'dragend', function() {
-          console.log("dragend");
+          //console.log("dragend");
+          draw_geoids();
         });
 
         /*
@@ -108,7 +113,7 @@
         */
 
         google.maps.event.addListener(map, 'idle', function() {
-          console.log("idle", map.getBounds().toString());
+          //console.log("idle", map.getBounds().toString());
           draw_geoids();
         });
 
@@ -142,14 +147,11 @@
       }
 
       function draw_geoids() {
-        console.log("draw_geoids");
         var mpp = meters_per_pixel();
         var min_geoid_size_m = LOWER_CUTOFF*mpp;
         var max_geoid_size_m = UPPER_CUTOFF*mpp;
         var minkm = min_geoid_size_m / 1000;
         var maxkm = max_geoid_size_m / 1000;
-
-        clear_circles();
 
         var map_bounds = map.getBounds() ? map.getBounds() : paris_bounds;
 
@@ -185,8 +187,16 @@
           min_i = Math.max(0, min_i - (25-(max_i - min_i)));
         }
 
-        _(candidates.slice(min_i, max_i)).each(function(e) {
-          if(true || e.radius >= minkm && e.radius <= maxkm) {
+        var geoids_shown_now = geoids_shown;
+        var geoids_to_show = candidates.slice(min_i, max_i);
+        geoids_shown = geoids_to_show;
+        // find out which geoids to add (in), which to remove (out)
+        // this could be more efficient, but hey
+        var geoids_in = _.difference(geoids_to_show, geoids_shown_now);
+        var geoids_out = _.difference(geoids_shown_now, geoids_to_show);
+
+        _(geoids_in).each(function(e) {
+          if(true) {
 
             var c = new google.maps.Circle({
               center: new google.maps.LatLng(e.lat, e.long),
@@ -215,19 +225,7 @@
               map: map
             });
 
-            /*
-            var c = new google.maps.Rectangle({
-              bounds: e.bounds,
-              strokeColor: "#3333ff",
-              fillColor: "#3333ff",
-              strokeWeight: 1,
-              strokeOpacity: 1,
-              fillOpacity: 0.2,
-              map: map
-            });
-            */
-
-            circles.push(m);
+            marker_for[e.geoid] = m;
 
             google.maps.event.addListener(m, 'mouseout', function() {
               c.setMap(null);
@@ -242,10 +240,17 @@
                 new google.maps.LatLng(e.min_lat, e.min_long),
                 new google.maps.LatLng(e.max_lat, e.max_long));
 
-              console.log("click", m.title, "changes bounds from", map.getBounds().toString(), "to", bounds.toString());
               map.fitBounds(bounds);
             });
 
+          }
+        });
+
+        _(geoids_out).each(function(e) {
+          // remove
+          if(marker_for[e.geoid]) {
+            marker_for[e.geoid].setMap(null);
+            delete marker_for[e.geoid];
           }
         });
       }
