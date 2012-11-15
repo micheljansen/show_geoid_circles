@@ -120,7 +120,7 @@
         // fetch geoids
         $.ajax("data/all_geoids_in_paris.json").done(function(data) {
           geoids = _(data).chain()
-                            .reject(function(e) {return e.num_results == 0 || e.type == "postcode";})
+                            //.reject(function(e) {return e.num_results == 0 || e.type == "postcode";})
                             .sortBy(function(e) {return -e.radius})
                             .value();
           draw_geoids();
