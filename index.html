@@ -90,18 +90,27 @@
         map.fitBounds(paris_bounds);
 
         google.maps.event.addListener(map, 'zoom_changed', function() {
-          draw_geoids();
+          console.log("zoom_changed");
+        });
+
+        google.maps.event.addListener(map, 'dragstart', function() {
         });
 
         google.maps.event.addListener(map, 'dragend', function() {
-          draw_geoids();
+          console.log("dragend");
         });
+
         /*
         google.maps.event.addListener(map, 'bounds_changed', function() {
-          console.log("pan/zoom", map.getZoom());
-          draw_geoids();
+          console.log("new bounds", map.getBounds().toString());
+          //draw_geoids();
         });
         */
+
+        google.maps.event.addListener(map, 'idle', function() {
+          console.log("idle", map.getBounds().toString());
+          draw_geoids();
+        });
 
         // fetch geoids
         $.ajax("data/all_geoids_in_paris.json").done(function(data) {
@@ -133,6 +142,7 @@
       }
 
       function draw_geoids() {
+        console.log("draw_geoids");
         var mpp = meters_per_pixel();
         var min_geoid_size_m = LOWER_CUTOFF*mpp;
         var max_geoid_size_m = UPPER_CUTOFF*mpp;
@@ -232,6 +242,7 @@
                 new google.maps.LatLng(e.min_lat, e.min_long),
                 new google.maps.LatLng(e.max_lat, e.max_long));
 
+              console.log("click", m.title, "changes bounds from", map.getBounds().toString(), "to", bounds.toString());
               map.fitBounds(bounds);
             });
 
