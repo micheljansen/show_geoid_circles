@@ -180,11 +180,12 @@
           }
         }
 
+        var NUM_MARKERS_TO_SHOW = 25;
 
-        max_i = Math.min(num_candidates, i+25);
+        max_i = Math.min(num_candidates, i+NUM_MARKERS_TO_SHOW);
         min_i = i;
-        if(max_i - min_i < 25) {
-          min_i = Math.max(0, min_i - (25-(max_i - min_i)));
+        if(max_i - min_i < NUM_MARKERS_TO_SHOW) {
+          min_i = Math.max(0, min_i - (NUM_MARKERS_TO_SHOW-(max_i - min_i)));
         }
 
         var geoids_shown_now = geoids_shown;
