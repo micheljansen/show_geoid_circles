@@ -34,7 +34,6 @@ Label.prototype.onAdd = function() {
 };
 
 Label.prototype.classes_changed = function() {
-  console.log("classes changed:", this.get('classes'));
   this.span_.className = this.get("classes");
 };
 
