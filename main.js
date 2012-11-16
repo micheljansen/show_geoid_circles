@@ -10,6 +10,7 @@ var geoids_shown = [];
 var marker_for = {};
 
 var UPPER_CUTOFF = 90;
+var NUM_MARKERS = 25;
 
 var marker_s = new google.maps.MarkerImage("marker.png", new google.maps.Size(17,17), new google.maps.Point(0,0), new google.maps.Point(8.5,8.5), new google.maps.Size(17,17));
 var marker_m = new google.maps.MarkerImage("marker.png", new google.maps.Size(34,34), new google.maps.Point(0,0), new google.maps.Point(17,17));
@@ -58,6 +59,7 @@ function initialize() {
                               geoids = _(data).chain()
                               .reject(function(e) {return e.num_results == 0 || e.type == "postcode";})
                               .sortBy(function(e) {return -e.radius})
+                              //.sortBy(function(e) {return -e.num_results})
                               .value();
                               draw_geoids();
                             });
@@ -79,7 +81,6 @@ function draw_geoids() {
   var mpp = meters_per_pixel();
   var max_geoid_size_m = UPPER_CUTOFF*mpp;
   var maxkm = max_geoid_size_m / 1000;
-  console.log(maxkm);
 
   var map_bounds = map.getBounds() ? map.getBounds() : paris_bounds;
 
@@ -94,7 +95,7 @@ function draw_geoids() {
   });
 
   var num_candidates = candidates.length;
-  var N = 10;
+  var N = NUM_MARKERS;
 
   // we don't want to show geo ids that are too big
   // skip the list until we reach the first geo id that is not too big to show
