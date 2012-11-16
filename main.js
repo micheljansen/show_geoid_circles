@@ -9,8 +9,7 @@ var geoids = [];
 var geoids_shown = [];
 var marker_for = {};
 
-var LOWER_CUTOFF = 60;
-var UPPER_CUTOFF = 300;
+var UPPER_CUTOFF = 90;
 
 var marker_s = new google.maps.MarkerImage("marker.png", new google.maps.Size(17,17), new google.maps.Point(0,0), new google.maps.Point(8.5,8.5), new google.maps.Size(17,17));
 var marker_m = new google.maps.MarkerImage("marker.png", new google.maps.Size(34,34), new google.maps.Point(0,0), new google.maps.Point(17,17));
@@ -78,10 +77,9 @@ function meters_per_pixel() {
 
 function draw_geoids() {
   var mpp = meters_per_pixel();
-  var min_geoid_size_m = LOWER_CUTOFF*mpp;
   var max_geoid_size_m = UPPER_CUTOFF*mpp;
-  var minkm = min_geoid_size_m / 1000;
   var maxkm = max_geoid_size_m / 1000;
+  console.log(maxkm);
 
   var map_bounds = map.getBounds() ? map.getBounds() : paris_bounds;
 
@@ -105,7 +103,7 @@ function draw_geoids() {
   var i = -1;
   while(i < Math.max(-1, num_candidates-N-1) && !found) {
     i++;
-    if(candidates[i].radius > minkm) {
+    if(candidates[i].radius > maxkm) {
       // too big
     }
     else {
