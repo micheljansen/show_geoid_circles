@@ -6,8 +6,6 @@ var paris_bounds = new google.maps.LatLngBounds(
 
 var geoids = [];
 
-var circles = [];
-
 var geoids_shown = [];
 var marker_for = {};
 
@@ -76,13 +74,6 @@ function meters_per_pixel() {
   var mpp = display_radius() / pixel_radius;
   //console.log(pixel_radius, display_radius(), mpp);
   return mpp;
-}
-
-function clear_circles() {
-  $(circles).each(function(i,c) {
-    c.setMap(null);
-  });
-  circles = [];
 }
 
 function draw_geoids() {
