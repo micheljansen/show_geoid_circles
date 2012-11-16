@@ -178,10 +178,6 @@ function draw_geoids() {
       var m = new google.maps.Marker({
         position: new google.maps.LatLng(e.lat, e.long),
         clickable: true,
-        fillColor: "#48B6E7",
-        strokeWeight: 2,
-        strokeOpacity: 1,
-        fillOpacity: 1,
         flat: true,
         title: e.title +" ("+e.num_results+")",
         icon: marker_image,
