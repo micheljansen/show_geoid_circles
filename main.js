@@ -8,6 +8,7 @@ var geoids = [];
 
 var geoids_shown = [];
 var marker_for = {};
+var current_geoid_radius = null;
 
 var UPPER_CUTOFF = 90;
 var NUM_MARKERS = 25;
@@ -209,6 +210,22 @@ function draw_geoids() {
           new google.maps.LatLng(e.max_lat, e.max_long));
 
           map.fitBounds(bounds);
+
+          /*
+          if(current_geoid_radius) {
+            current_geoid_radius.setMap(null);
+          }
+          current_geoid_radius = new google.maps.Circle({
+            center: new google.maps.LatLng(e.lat, e.long),
+            radius: e.radius*1000,
+            strokeColor: "#333",
+            fillColor: "black",
+            strokeWeight: 2,
+            strokeOpacity: .7,
+            fillOpacity: 0.2,
+            map: map
+          });
+          */
       });
 
     }
