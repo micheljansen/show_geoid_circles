@@ -5,9 +5,12 @@ function Label(opt_options) {
 
  // Label specific
  var span = this.span_ = document.createElement('span');
+ /*
  span.style.cssText = 'position: relative; left: -50%; top: -8px; ' +
                       'white-space: nowrap; border: 1px solid blue; ' +
                       'padding: 2px; background-color: white';
+ */
+ span.className += " placename-label";
 
  var div = this.div_ = document.createElement('div');
  div.appendChild(span);
@@ -17,7 +20,7 @@ Label.prototype = new google.maps.OverlayView;
 
 // Implement onAdd
 Label.prototype.onAdd = function() {
- var pane = this.getPanes().overlayLayer;
+ var pane = this.getPanes().floatPane;
  pane.appendChild(this.div_);
 
  // Ensures the label is redrawn if the text or position is changed.

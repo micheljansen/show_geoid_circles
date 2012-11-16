@@ -185,14 +185,24 @@ function draw_geoids() {
         map: map
       });
 
+      var l = new Label({
+        position: new google.maps.LatLng(e.lat, e.long),
+        text: e.title,
+        //map: map
+      });
+
       marker_for[e.geoid] = m;
+
+
 
       google.maps.event.addListener(m, 'mouseout', function() {
         c.setMap(null);
+        l.setMap(null);
       });
 
       google.maps.event.addListener(m, 'mouseover', function() {
         c.setMap(map);
+        l.setMap(map);
       });
 
       google.maps.event.addListener(m, 'click', function() {
