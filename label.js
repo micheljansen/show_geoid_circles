@@ -1,16 +1,16 @@
 // Define the overlay, derived from google.maps.OverlayView
 function Label(opt_options) {
+ // Label specific
+ var span = this.span_ = document.createElement('span');
+
  // Initialization
  this.setValues(opt_options);
 
- // Label specific
- var span = this.span_ = document.createElement('span');
  /*
  span.style.cssText = 'position: relative; left: -50%; top: -8px; ' +
                       'white-space: nowrap; border: 1px solid blue; ' +
                       'padding: 2px; background-color: white';
  */
- span.className += " placename-label";
 
  var div = this.div_ = document.createElement('div');
  div.appendChild(span);
@@ -29,8 +29,13 @@ Label.prototype.onAdd = function() {
    google.maps.event.addListener(this, 'position_changed',
        function() { me.draw(); }),
    google.maps.event.addListener(this, 'text_changed',
-       function() { me.draw(); })
+       function() { me.draw(); }),
  ];
+};
+
+Label.prototype.classes_changed = function() {
+  console.log("classes changed:", this.get('classes'));
+  this.span_.className = this.get("classes");
 };
 
 // Implement onRemove

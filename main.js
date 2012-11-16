@@ -179,7 +179,15 @@ function draw_geoids() {
       var l = new Label({
         position: new google.maps.LatLng(e.lat, e.long),
         text: e.title,
+        classes: "placename-label"
         //map: map
+      });
+
+      var results_count = new Label({
+        position: new google.maps.LatLng(e.lat, e.long),
+        text: ""+e.num_results,
+        classes: "placename-results-count",
+        map: map
       });
 
       marker_for[e.geoid] = m;
