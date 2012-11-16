@@ -190,9 +190,9 @@ function draw_geoids() {
         map: map
       });
 
+      m.bindTo("map", results_count, "map");
+
       marker_for[e.geoid] = m;
-
-
 
       google.maps.event.addListener(m, 'mouseout', function() {
         c.setMap(null);
