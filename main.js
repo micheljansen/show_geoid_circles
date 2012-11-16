@@ -14,7 +14,7 @@ var UPPER_CUTOFF = 300;
 
 var marker_s = new google.maps.MarkerImage("marker.png", new google.maps.Size(17,17), new google.maps.Point(0,0), new google.maps.Point(8.5,8.5), new google.maps.Size(17,17));
 var marker_m = new google.maps.MarkerImage("marker.png", new google.maps.Size(34,34), new google.maps.Point(0,0), new google.maps.Point(17,17));
-var marker_l = new google.maps.MarkerImage("marker.png", new google.maps.Size(68,68), new google.maps.Point(0,0), new google.maps.Point(34,34), new google.maps.Size(68,68));
+var marker_l = new google.maps.MarkerImage("marker-l.png", new google.maps.Size(68,68), new google.maps.Point(0,0), new google.maps.Point(34,34), new google.maps.Size(68,68));
 
 function initialize() {
   var mapOptions = {
