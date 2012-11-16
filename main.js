@@ -156,10 +156,10 @@ function draw_geoids() {
       var c = new google.maps.Circle({
         center: new google.maps.LatLng(e.lat, e.long),
         radius: e.radius*1000,
-        strokeColor: "#48B6E7",
-        fillColor: "white",
-        strokeWeight: 1,
-        strokeOpacity: 1,
+        strokeColor: "#333",
+        fillColor: "black",
+        strokeWeight: 2,
+        strokeOpacity: .7,
         fillOpacity: 0.2,
       });
 
